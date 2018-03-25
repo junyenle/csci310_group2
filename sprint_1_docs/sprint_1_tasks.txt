@@ -1,0 +1,23 @@
+Group O
+PM: Shan
+Sprint 1 Tasks (Prioritized)
+
+1. Develop black box tests and prepare white box tests
+	(note: most of our old white box tests should still work. Only those for the new class will need to be created from scratch)
+2. Write a collage builder class that can build in the shape of letters.
+3. Integrate new collage builder into the old (reused) project.
+	(note: we will leave conformance to changed UI requirements for a later sprint)
+4. Prepare white box tests for collage builder class
+5. Design animated loading icon.
+
+
+Sprint 1 Initial Task Allocation
+
+Scrum master: Shan
+Quality Assurance: Shan
+Task 1: Brian, Pedro
+Task 2: Jun, Pablo
+Task 3: Jun, Pablo
+Task 4: Brian, Pedro
+Task 5: Jun
+Appendix / Docs: Young, Shan
