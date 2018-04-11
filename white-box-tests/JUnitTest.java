@@ -14,6 +14,14 @@ import classes.CollageOptions;
 
 
 public class JUnitTest {
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	
+	@Before
+	public void setUpStreams() {
+	    System.setOut(new PrintStream(outContent));
+	    System.setErr(new PrintStream(errContent));
+	}
 	
 	// Test for CollageOptions Constructor
 	@Test
@@ -137,4 +145,50 @@ public class JUnitTest {
 		assertTrue(srcHeight != rotatedImage.getHeight());
 		assertTrue(srcWidth != rotatedImage.getWidth());
 	}
+	
+	//Test for security
+	@Test
+	public void testLogin() {
+//		Security s = new Security();
+		boolean loginT = Security.authenticate("jun", "july");
+		String messageT = outContent.toString();
+		
+		boolean loginF = Security.authenticate("jun", "jacob");
+		String messageF = outContent.toString();
+		
+		assertTrue(loginT);
+		assertEquals("Successfully logged in user jun", messageT);
+		
+		assertFalse(loginF);
+		assertEquals("Unable to log in user jun", messageF);
+	}
+	
+//	register is private, so this might not work
+//	@Test
+//	public void testRegister() {
+//		boolean regT = Security.registerUser("abc", "123");
+//		String messageT = outContent.toString();
+//		
+//		boolean regF = Security.registerUser("jun", "123");
+//		String messageF = outContent.toString();
+//		
+//		assertTrue(regT);
+//		assertEquals("User pedro registered", messageT);
+//		
+//		assertFalse(regF);
+//		assertEquals("User jun already exists!", messageF);
+//	}
+	
+	//Tests for Image Sourcer
+	@Test
+	public void testImageSourcer() {
+		ImageSourcer s = new ImageSourcer("sharks", 3);
+		BufferedImage b = s.getImage();
+		assertNotNull(b);
+		
+		ImageSourcer s2 = new ImageSourcer("afheodi  hgouvrehivn oreg", 3);
+		BufferedImage b2 = s2.getImage();
+		assertNull(b2);
+	}
+	
 }
