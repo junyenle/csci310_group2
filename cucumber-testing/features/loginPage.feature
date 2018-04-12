@@ -21,4 +21,4 @@ Scenario: Login Button is Pressed
 	When I enter "username" in the username box
 	And I enter "password" in the password box
 	And click the login button
-	Then I am on the Main Page
+	Then I am on the Main Page for the first time
