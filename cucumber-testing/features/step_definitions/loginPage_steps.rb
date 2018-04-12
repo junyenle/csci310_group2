@@ -26,7 +26,7 @@ When(/^click the login button$/) do
   click_button('Log In')
 end
 
-Then(/^I am on the Main Page$/) do
+Then(/^I am on the Main Page for the first time$/) do
   expect(page).to have_content('Build Your Collage')
 end
 
