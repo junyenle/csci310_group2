@@ -1,0 +1,36 @@
+/* BODY AND HTML */
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+/* LOGIN CONTAINER */
+#login-container {
+    margin: auto;
+    position: relative;
+    text-align: center;
+    top: 30%;
+    width: 25%;
+}
+
+/* LOGIN BUTTON */
+#loginbutton {
+    display: block;
+    margin: auto;
+    background-color: #777777;
+    border: 2px solid #777777;
+}
+
+/* TITLE */
+#title > h1 {
+    margin-bottom: 10px;
+}
+
+/* USERNAME AND PASSWORD */
+#username {
+    margin-bottom: 10px;
+}
+#password {
+    margin-bottom: 10px;
+}
+

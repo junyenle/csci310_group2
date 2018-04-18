@@ -11,3 +11,5 @@ note for pulling code:
 
 1. DO NOT pull straight into your project folder. COPY the files here into their respective
 	locations in your workspace. This will fix all the config issues.
+2. It's very simple. Just copy everything except the cucumber-testing folder into your project directory.
+3. cucumber-testing folder can go anywhere... by default the execution script looks in the home directory (home/student/home)
