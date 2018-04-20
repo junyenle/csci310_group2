@@ -1,7 +1,109 @@
-Given(/^I am on the Main Page$/) do
-  visit "http://localhost:8080/CS310-ProjectTwo/index.jsp"
+Given(/^I navigate to the Main Page$/) do
+  visit "http://localhost:8080/CS310-ProjectTwo/login.jsp"
+  fill_in('username', :with => "username")
+  fill_in('password', :with => "password")
+  click_button('Log In')
 end
 
+When(/^I click on the options button$/) do
+  click_button('Options')
+end
+
+Then(/^there is a collage border width text field$/) do
+  expect(page).to have_field('collageBorderWidth')
+end
+
+Then(/^there is a collage border color text field$/) do
+  expect(page).to have_field('collageBorderColor')
+end
+
+Then(/^there is a photo border width text field$/) do
+  expect(page).to have_field('photoBorderWidth')
+end
+
+Then(/^there is a photo border color text field$/) do
+  expect(page).to have_field('photoBorderColor')
+end
+
+Then(/^there is a minimum rotation text field$/) do
+  expect(page).to have_field('minRotation')
+end
+
+Then(/^there is a maximum rotation text field$/) do
+  expect(page).to have_field('maxRotation')
+end
+
+Then(/^there is a collage width text field$/) do
+  expect(page).to have_field('collageWidth')
+end
+
+Then(/^there is a collage height text field$/) do
+  expect(page).to have_field('collageHeight')
+end
+
+Then(/^there is a filter dropdown field$/) do
+  expect(page).to have_field('filter')
+end
+
+When(/^wait (\d+) seconds$/) do |arg1|
+  sleep(30)
+end
+
+Then(/^there is an insufficient number of images found error$/) do
+  expect(page).to have_css('#error')
+end
+
+Then(/^the input box has placeholder for Enter topic$/) do
+  expect(page).to have_xpath("//input[@placeholder='Enter topic']")
+end
+
+Then(/^the shape input box has placeholder for Enter shape$/) do
+  expect(page).to have_xpath("//input[@placeholder='Enter shape']")
+end
+
+When(/^enter "([^"]*)" for collage border width$/) do |arg1|
+  fill_in('collageBorderWidth', :with => arg1)
+end
+
+When(/^enter "([^"]*)" for collage border color$/) do |arg1|
+  fill_in('collageBorderColor', :with => arg1)
+end
+
+When(/^enter "([^"]*)" for photo border width$/) do |arg1|
+  fill_in('photoBorderWidth', :with => arg1)
+end
+
+When(/^enter "([^"]*)" for photo border color$/) do |arg1|
+  fill_in('photoBorderColor', :with => arg1)
+end
+
+When(/^enter "([^"]*)" for minimum rotation$/) do |arg1|
+  fill_in('minRotation', :with => arg1)
+end
+
+When(/^enter "([^"]*)" for maximum rotation$/) do |arg1|
+  fill_in('maxRotation', :with => arg1)
+end
+
+When(/^click on the build collage button$/) do
+  click_button('Build Collage')
+end
+
+Then(/^there is a collage with those features$/) do
+  expect(page).to have_css('#collage')
+end
+
+When(/^enter "([^"]*)" for collage width$/) do |arg1|
+  fill_in('collageWidth', :with => arg1)
+end
+
+When(/^enter "([^"]*)" for collage height$/) do |arg1|
+  fill_in('collageHeight', :with => arg1)
+end
+
+When(/^select "([^"]*)" for filter$/) do |arg1|
+  fill_in('filter', :with => arg1)
+end
 Then(/^there is a title$/) do
   expect(page).to have_css('#title')
 end
@@ -67,47 +169,38 @@ Then(/^I stay on the Main Page$/) do
 end
 
 When(/^I clear Collage Border Width$/) do
-  click_button('Options')
   fill_in('collageBorderWidth', :with => "")
 end
 
 When(/^I clear Collage Border Color$/) do
-  click_button('Options')
   fill_in('collageBorderColor', :with => "")
 end
 
 When(/^I clear Photo Border Width$/) do
-  click_button('Options')
   fill_in('photoBorderWidth', :with => "")
 end
 
 When(/^I clear Photo Border Color$/) do
-  click_button('Options')
   fill_in('photoBorderColor', :with => "")
 end
 
 When(/^I clear Minimum Rotation$/) do
-  click_button('Options')
   fill_in('minRotation', :with => "")
 end
 
 When(/^I clear Maximum Rotation$/) do
-  click_button('Options')
   fill_in('maxRotation', :with => "")
 end
 
 When(/^I clear Collage Width$/) do
-  click_button('Options')
   fill_in('collageWidth', :with => "")
 end
 
 When(/^I clear Collage Height$/) do
-  click_button('Options')
   fill_in('collageHeight', :with => "")
 end
 
 When(/^I clear Filter$/) do
-  click_button('Options')
   fill_in('filter', :with => "")
 end
 
