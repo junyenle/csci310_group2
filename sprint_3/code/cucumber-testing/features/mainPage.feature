@@ -530,3 +530,7 @@ Scenario: Empty Collage Shape
 	When I generate a collage for "sharks" saying ""
 	Then I stay on the Main Page
 
+Scenario: Loading Animation
+	And I generate a collage for "shark" saying "A"
+	Then a loading animation appears
+

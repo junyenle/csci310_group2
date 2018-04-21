@@ -207,3 +207,7 @@ end
 Then(/^collage options is open$/) do
   expect(page).to have_css('.vex-dialog-input')
 end
+
+Then(/^a loading animation appears$/) do
+  expect(page).to have_css('#animation')
+end
