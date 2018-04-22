@@ -261,6 +261,15 @@ let showOptions = () => {
                              '<input name="collageHeight" type="text" value="600" required />';
     let filterInput = '<label>Filter</label>' + 
                       '<input name="filter" type="text" value="blur" required />';
+    let filterInput =   '<label>Filter</label>' + 
+                        '<div>' +
+                            '<input type="radio" id="bnw" name="filter"  value="blacknwhite">' +
+                            '<label id="bnw-label" for="bnw">Black and White</label>' +
+                            '<input type="radio" id="greyscale" name="filter"  value="greyscale">' +
+                            '<label id="greyscale-label" for="greyscale">Greyscale</label>' +
+                            '<input type="radio" id="sepia" name="filter"  value="sepia">' +
+                            '<label id="sepia-label" for="sepia">Sepia</label>' +
+                        '</div>';
 
     // Open the vex dialog that will get the users data input 
     vex.dialog.open({
@@ -285,6 +294,9 @@ let showOptions = () => {
             // TODO: Get more information about this option functionality
             if (data) {
                 console.log("Got this data: " + data);
+                if (!('filter' in data)) {
+                    data.filter = "";
+                }
                 optionData = data;
             }
             else {

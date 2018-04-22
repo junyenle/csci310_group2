@@ -6,9 +6,12 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Base64;
 import java.util.Random;
 import java.util.Vector;
 
@@ -52,10 +55,10 @@ public class CollageBuilder {
 		}
 	}
 
-	/* builds a collage in the shape of the "shape" string
-	*  args: imagesourcer object, shape string
-	*  returns: collage as buffered image
-	*/
+	/*
+	 * builds a collage in the shape of the "shape" string args: imagesourcer
+	 * object, shape string returns: collage as buffered image
+	 */
 	public BufferedImage buildCollage(ImageSourcer s, String shape) {
 		// determine whether height or width is limiting factor
 		int gridSideLength = 0;
@@ -163,9 +166,12 @@ public class CollageBuilder {
 			BufferedImage characterOverlay = null;
 
 			if (shape.charAt(i) != ' ') { // if letter is not blank
-				// open the stamp file (like a cookie cutter, cuts the collage into shape of letter)
+				// open the stamp file (like a cookie cutter, cuts the collage into shape of
+				// letter)
 				String filename = "/home/student/Desktop/eclipse/" + shape.charAt(i) + ".png";
-				//String filename = "/Users/pablochung/Desktop/somecode/CS310-ProjectTwo/letters/" + shape.charAt(i) + ".png";
+				// String filename =
+				// "/Users/pablochung/Desktop/somecode/CS310-ProjectTwo/letters/" +
+				// shape.charAt(i) + ".png";
 				try {
 					characterOverlay = ImageIO.read(new File(filename));
 				} catch (IOException e) {
@@ -211,15 +217,22 @@ public class CollageBuilder {
 		collage = addPadding(collage, options.getCollageBorderWidth(), this.collageBorderColor);
 
 		// apply filter, if exists
-		// TODO
+		if (options.getFilter().equals("blacknwhite")) {
+			collage = filter(collage, 0);
+		} else if (options.getFilter().equals("greyscale")) {
+			collage = filter(collage, 1);
+		} else if (options.getFilter().equals("sepia")) {
+			collage = filter(collage, 2);
+		}
 
 		return collage;
 	} // buildCollage end
 
-	/* Rotates the given image by the given number of degrees and returns resulting image
-	 * args: source buffered image, degrees to rotate (int)
-	 * returns: result buffered image
-	*/
+	/*
+	 * Rotates the given image by the given number of degrees and returns resulting
+	 * image args: source buffered image, degrees to rotate (int) returns: result
+	 * buffered image
+	 */
 	public BufferedImage rotateImage(BufferedImage src, int inDegrees) {
 		// Calculate the width and height of the rotated image
 		double rad = Math.toRadians(inDegrees);
@@ -237,10 +250,10 @@ public class CollageBuilder {
 		return rotatedImage;
 	}
 
-	/* scales image based off provided width and height
-	 * args: source buffered image, desired width, desired height (int, int)
-	 * returns: result buffered image
-	*/
+	/*
+	 * scales image based off provided width and height args: source buffered image,
+	 * desired width, desired height (int, int) returns: result buffered image
+	 */
 	private BufferedImage getScaledImage(BufferedImage src, int width, int height) {
 		int srcWidth = src.getWidth();
 		int srcHeight = src.getHeight();
@@ -260,10 +273,10 @@ public class CollageBuilder {
 		return scaledImage;
 	}
 
-	/* Adds border around image
-	 * args: source buffered image, padding width (int), padding color (Color)
-	 * returns: result buffered image
-	*/
+	/*
+	 * Adds border around image args: source buffered image, padding width (int),
+	 * padding color (Color) returns: result buffered image
+	 */
 	private BufferedImage addPadding(BufferedImage src, int width, Color color) {
 		int imagePadding = width;
 		int srcWidth = src.getWidth(), srcHeight = src.getHeight();
@@ -278,6 +291,84 @@ public class CollageBuilder {
 		g2d.drawImage(src, imagePadding, imagePadding, null);
 		g2d.dispose();
 		return paddedImage;
+	}
+
+	/*
+	 * Adds filter to image args: source buffered image, integer 0=bw filter,
+	 * 1=greyscale, 2=sepia returns: result buffered image
+	 */
+	private BufferedImage filter(BufferedImage img, int filterCode) {
+		try {
+			if (filterCode == 0) {
+				BufferedImage blacknwhite = new BufferedImage(img.getWidth(), img.getHeight(),
+						BufferedImage.TYPE_BYTE_BINARY);
+
+				Graphics2D g2d = blacknwhite.createGraphics();
+				g2d.drawImage(img, 0, 0, null);
+
+				return blacknwhite;
+			} else if (filterCode == 1) {
+				BufferedImage greyscale = new BufferedImage(img.getWidth(), img.getHeight(),
+						BufferedImage.TYPE_BYTE_GRAY);
+
+				Graphics2D g2d = greyscale.createGraphics();
+				g2d.drawImage(img, 0, 0, null);
+
+				return greyscale;
+			} else if (filterCode == 2) {
+				// get width and height of the image
+				int width = img.getWidth();
+				int height = img.getHeight();
+
+				// convert to sepia
+				for (int y = 0; y < height; y++) {
+					for (int x = 0; x < width; x++) {
+						int p = img.getRGB(x, y);
+
+						int a = (p >> 24) & 0xff;
+						int r = (p >> 16) & 0xff;
+						int g = (p >> 8) & 0xff;
+						int b = p & 0xff;
+
+						// calculate tr, tg, tb
+						int tr = (int) (0.393 * r + 0.769 * g + 0.189 * b);
+						int tg = (int) (0.349 * r + 0.686 * g + 0.168 * b);
+						int tb = (int) (0.272 * r + 0.534 * g + 0.131 * b);
+
+						// check condition
+						if (tr > 255) {
+							r = 255;
+						} else {
+							r = tr;
+						}
+
+						if (tg > 255) {
+							g = 255;
+						} else {
+							g = tg;
+						}
+
+						if (tb > 255) {
+							b = 255;
+						} else {
+							b = tb;
+						}
+
+						// set new RGB value
+						p = (a << 24) | (r << 16) | (g << 8) | b;
+
+						img.setRGB(x, y, p);
+					} // end for x
+				} // end for y
+
+				return img;
+			} // end sepia
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }
