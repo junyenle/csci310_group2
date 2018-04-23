@@ -31,6 +31,8 @@ public class CollageBuilderServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		System.out.println("received request to build");
 		// Ensuring that HttpSession exists
 		HttpSession session = request.getSession(false);
 		// If HttpSession does not exist, create one
@@ -71,6 +73,7 @@ public class CollageBuilderServlet extends HttpServlet {
 		ImageSourcer s = new ImageSourcer(searchText, requiredImages + buffer + searchText.length());
 		if (s.isValid()) // if image sourcing worked, build collage
 		{
+			System.out.println("sufficient images found: on to building!");
 			// Prepare collagebuilder
 			int browserWidth = Integer.valueOf(request.getParameter("browserWidth").trim());
 			int browserHeight = Integer.valueOf(request.getParameter("browserHeight").trim());
@@ -85,12 +88,14 @@ public class CollageBuilderServlet extends HttpServlet {
 		} else // don't even build collage
 		{
 			collageBuildingFailed = true;
+			System.out.println("insufficient images found");
 		}
 
 		// Result string to hold response text
 		String result = "";
 		if (collageBuildingFailed) {
 			result = "fail " + searchText;
+			collageManager.wipeCollages();
 		} else {
 			result = "success";
 		}
