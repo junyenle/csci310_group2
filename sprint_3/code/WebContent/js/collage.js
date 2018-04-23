@@ -11,6 +11,11 @@
  *   logging in
  * - Use encryption aka HTTPS
  * - Allow it to not set any options
+ * - Find and add error handling
+ * - Get the delete functionality working + AJAX call
+ * - Add the dropdown menu with these inputs
+ *      - With options: Black and White, Sepia, Greyscale
+ *      - Send these inputs: blacknwhite, greyscale, and sepia
  */
 
 // Flag to tell us that the collage could not be generated
@@ -29,9 +34,12 @@ let optionData = {
     filter: ""
 };
 
+// Store the collage we loaded and its index
+let clickedCollageIndex = -1;
+
 // Attach the event listener here
 $(document).ready( () => {
-
+	
     // Gets the reference to the div for the error message
     let error = $('#error')[0];
 
@@ -42,6 +50,9 @@ $(document).ready( () => {
     else {
         $('#export').attr("disabled", false);
     }
+    
+    // By default, disable delete button
+    $('#deletebutton').attr("disabled", true);
 
     // Attach the search button listener
     $('#searchbutton').click(buildCollage);
@@ -53,7 +64,16 @@ $(document).ready( () => {
     $('#optionbutton').click(showOptions);
 
     // Swap the collages when clicking on the previous collage
-    $('.prev-collage').on('click', swapCollage);
+    $('.prev-collage').on('click', function(e){
+        e.preventDefault();
+        
+        // Swap the collage
+        swapCollage(this);
+        clickedCollageIndex = $(this).index();
+        console.log(clickedCollageIndex);
+        // let index = $(this).index();
+        // console.log(index);
+    });
 
     // Check if the search box is empty or not
     $('#searchtext').keyup(disableSearchButton);
@@ -63,6 +83,9 @@ $(document).ready( () => {
 
     // Save the collage button
     $('#savebutton').click(saveCollage);
+
+    // Delete the collage we loaded into the main collage
+    $('#deletebutton').click(deleteCollage); 
 });
 
 // Permit the Enter key to search and build the collage
@@ -74,14 +97,14 @@ let permitEnterKey = (e) => {
 }
 
 // Swap the collage
-let swapCollage = function() {
+let swapCollage = function(prev) {
 
     // Get the fields we need to swap the collage
     let collage = $("#collage")[0];     // Container that holds collage
     let main = $('#main')[0];           // Main collage Image
     let title = $("h1")[0];             // Title of collage
     let error = $('#error')[0];         // Error message
-    let prevCollage = this;             // Selected previous collage
+    let prevCollage = prev;             // Selected previous collage
 
     // Temporary variables
     let prevTemp = $(prevCollage).attr("src");
@@ -120,6 +143,9 @@ let swapCollage = function() {
         // Change title
         $(title).html("Collage for topic " + prevAlt);   
     }
+    
+    // enable the delete button
+    $('#deletebutton').attr("disabled", false);
 }
 
 // Disable search button
@@ -185,7 +211,7 @@ let buildCollage = () => {
         success: (response) => {
             let res = response.split(" ");
             if (res[0] == "success") {
-                location.reload();
+                //location.reload();
                 fail = false;
             }
             else {
@@ -224,6 +250,8 @@ let buildCollage = () => {
                     $(title).html("Collage for topic "+ res[1]);
                 }
             }
+
+            location.reload();
         }
     });
 }
@@ -244,23 +272,21 @@ let showOptions = () => {
      *  - private String filter; 
      */
     let collageBorderWidthInput = '<label>Collage Border Width</label>' + 
-                                  '<input name="collageBorderWidth" type="text" value="5" required />';
+                                  '<input name="collageBorderWidth" type="text" value="0" />';
     let collageBorderColorInput = '<label>Collage Border Color</label>' + 
-                                  '<input name="collageBorderColor" type="text" value="red" required />';
+                                  '<input name="collageBorderColor" type="text" value="" />';
     let photoBorderWidthInput = '<label>Photo Border Width</label>' + 
-                                '<input name="photoBorderWidth" type="text" value="5" required />';
+                                '<input name="photoBorderWidth" type="text" value="0" />';
     let photoBorderColorInput = '<label>Photo Border Color</label>' + 
-                                '<input name="photoBorderColor" type="text" value="white" required />';
+                                '<input name="photoBorderColor" type="text" value="" />';
     let minRotationInput = '<label>Minimum Rotation</label>' + 
-                           '<input name="minRotation" type="text" value="-35" required />';
+                           '<input name="minRotation" type="text" value="-45" />';
     let maxRotationInput = '<label>Maxium Rotation</label>' + 
-                           '<input name="maxRotation" type="text" value="35" required />';
+                           '<input name="maxRotation" type="text" value="45" />';
     let collageWidthInput = '<label>Collage Width</label>' + 
-                            '<input name="collageWidth" type="text" value="800" required />';
+                            '<input name="collageWidth" type="text" value="800" />';
     let collageHeightInput = '<label>Collage Height</label>' + 
-                             '<input name="collageHeight" type="text" value="600" required />';
-    let filterInput = '<label>Filter</label>' + 
-                      '<input name="filter" type="text" value="blur" required />';
+                             '<input name="collageHeight" type="text" value="600"/>';
     let filterInput =   '<label>Filter</label>' + 
                         '<div>' +
                             '<input type="radio" id="bnw" name="filter"  value="blacknwhite">' +
@@ -271,7 +297,6 @@ let showOptions = () => {
                             '<label id="sepia-label" for="sepia">Sepia</label>' +
                         '</div>';
 
-    // Open the vex dialog that will get the users data input 
     vex.dialog.open({
         message: 'Please select all the options for these collages',
         input: [
@@ -317,11 +342,38 @@ let saveCollage = () => {
             let res = response.split(' ');
             if (res[0] == "success") {
                 console.log("SUCCESS :)");
-                location.reload();
+                location.reload(true);
             }
             else {
                 console.log("FAILURE :(");
+                location.reload(true);
             }
         }
     });
+}
+
+// Delete the collages
+let deleteCollage = () => {
+    if (clickedCollageIndex != -1) {
+    	console.log("deleting: " + clickedCollageIndex);
+        // We'll add the ajax later :)
+        $.ajax({
+            type: "POST",
+            url: "deleteCollageServlet",
+            data: {
+                clickedIndex: clickedCollageIndex
+            },
+            success:(response) => {
+                let res = response.split(' ');
+                if (res[0] == "success") {
+                    console.log("SUCCESS :))))");
+                    location.reload(true);
+                } 
+                else {
+                    console.log("FAILURE :(");  
+                    location.reload(true);
+                }
+            }
+        });
+    } 
 }

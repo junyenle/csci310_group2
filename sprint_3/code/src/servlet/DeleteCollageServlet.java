@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
 import classes.CollageManager;
 
 /**
- * Save Collage Servlet Implementation
+ * Delete Collage Servlet Implementation
  */
-@WebServlet("/saveCollageServlet")
-public class SaveCollageServlet extends HttpServlet {
+@WebServlet("/deleteCollageServlet")
+public class DeleteCollageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public SaveCollageServlet() {
+	public DeleteCollageServlet() {
 		super();
 	}
 
@@ -26,25 +26,36 @@ public class SaveCollageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Ensuring that HttpSession exists
 		HttpSession session = request.getSession(false);
-		// If HttpSession does not exist, create one
+		// If HttpSession does not exist, halt
 		if (session == null) {
-			session = request.getSession(true);
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write("failure");
+			return;
 		}
 		// Ensuring that a CollageManager exists
 		if (session.getAttribute("collageManager") == null) {
-			// If CollageManager does not exist, create one
-			CollageManager collageManager = new CollageManager();
-			session.setAttribute("collageManager", collageManager); // Set session attribute to created CollageManager
+			// If CollageManager does not exist, halt
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write("failure");
+			return;
 		}
+		
 		// Access CollageManager from HttpSession
-		CollageManager collageManager = (CollageManager) session.getAttribute("collageManager");
+		CollageManager manager = (CollageManager) session.getAttribute("collageManager");
 
-		// save collage
-		boolean collageSaved = collageManager.saveCollage((String) session.getAttribute("username"));
+		// get request parameters
+		String rawIndex = request.getParameter("clickedIndex");
+		System.out.println("deleting index: " + rawIndex);
+		int index = Integer.valueOf(rawIndex);
 
+		// perform deletion
+		boolean collageDeleted = manager.deleteCollage((String) session.getAttribute("username"), index);
+		
 		// Result string to hold response text
 		String result = "";
-		if (collageSaved) {
+		if (collageDeleted) {
 			result = "success";
 		} else {
 			result = "failed";
@@ -52,7 +63,7 @@ public class SaveCollageServlet extends HttpServlet {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(result);
-		session.setAttribute("collageManager", collageManager); // Set session attribute to created CollageManager
+		session.setAttribute("collageManager", manager); // Set session attribute to created CollageManager
 	} // End service
 
 }

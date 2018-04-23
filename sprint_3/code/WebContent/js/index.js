@@ -5,6 +5,7 @@
  *   logging in
  * - Use encryption aka HTTPS
  * - Allow it to not set any options
+ * - Find and add error handling 
  */
 
 // Option data that the user wants to do 
@@ -22,6 +23,7 @@ let optionData = {
 
 // When document is ready bind the event listeners
 $(document).ready( () => {
+
     // Attach the search button listener
     $('#searchbutton').click(buildCollage);
 
@@ -116,21 +118,21 @@ let showOptions = () => {
      *  - private String filter; 
      */
     let collageBorderWidthInput = '<label>Collage Border Width</label>' + 
-                                  '<input name="collageBorderWidth" type="text" value="5" required />';
+                                  '<input name="collageBorderWidth" type="text" value="0" />';
     let collageBorderColorInput = '<label>Collage Border Color</label>' + 
-                                  '<input name="collageBorderColor" type="text" value="red" required />';
+                                  '<input name="collageBorderColor" type="text" value="" />';
     let photoBorderWidthInput = '<label>Photo Border Width</label>' + 
-                                '<input name="photoBorderWidth" type="text" value="5" required />';
+                                '<input name="photoBorderWidth" type="text" value="0" />';
     let photoBorderColorInput = '<label>Photo Border Color</label>' + 
-                                '<input name="photoBorderColor" type="text" value="white" required />';
+                                '<input name="photoBorderColor" type="text" value="" />';
     let minRotationInput = '<label>Minimum Rotation</label>' + 
-                           '<input name="minRotation" type="text" value="-35" required />';
+                           '<input name="minRotation" type="text" value="-45" />';
     let maxRotationInput = '<label>Maxium Rotation</label>' + 
-                           '<input name="maxRotation" type="text" value="35" required />';
+                           '<input name="maxRotation" type="text" value="45" />';
     let collageWidthInput = '<label>Collage Width</label>' + 
-                            '<input name="collageWidth" type="text" value="800" required />';
+                            '<input name="collageWidth" type="text" value="800" />';
     let collageHeightInput = '<label>Collage Height</label>' + 
-                             '<input name="collageHeight" type="text" value="600" required />';
+                             '<input name="collageHeight" type="text" value="600"/>';
     let filterInput =   '<label>Filter</label>' + 
                         '<div>' +
                             '<input type="radio" id="bnw" name="filter"  value="blacknwhite">' +
