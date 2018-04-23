@@ -1,0 +1,46 @@
+Feature: Collage Page
+
+  Background: [90m                           # features/collagePage.feature:3[0m
+    [32mGiven I navigate to the Collage Page[90m # features/step_definitions/collagePage_steps.rb:1[0m[0m
+
+  Scenario: Empty Photo Border Width[90m          # features/collagePage.feature:50[0m
+    [31mWhen I clear Photo Border Width[90m           # features/step_definitions/mainPage_steps.rb:179[0m[0m
+[31m      Unable to find field "photoBorderWidth" (Capybara::ElementNotFound)[0m
+[31m      ./features/step_definitions/mainPage_steps.rb:180:in `/^I clear Photo Border Width$/'[0m
+[31m      features/collagePage.feature:52:in `When I clear Photo Border Width'[0m
+    [36mAnd click on the set options button[90m       # features/step_definitions/mainPage_steps.rb:131[0m[0m
+    [36mThen the collage options box remains open[90m # features/step_definitions/collagePage_steps.rb:53[0m[0m
+
+  Scenario: Empty Filter[90m                      # features/collagePage.feature:86[0m
+    [31mWhen I clear Filter[90m                       # features/step_definitions/mainPage_steps.rb:203[0m[0m
+[31m      Unable to find field "filter" (Capybara::ElementNotFound)[0m
+[31m      ./features/step_definitions/mainPage_steps.rb:204:in `/^I clear Filter$/'[0m
+[31m      features/collagePage.feature:88:in `When I clear Filter'[0m
+    [36mAnd click on the set options button[90m       # features/step_definitions/mainPage_steps.rb:131[0m[0m
+    [36mThen the collage options box remains open[90m # features/step_definitions/collagePage_steps.rb:53[0m[0m
+
+  Scenario: Empty Minimum Rotation[90m            # features/collagePage.feature:62[0m
+    [31mWhen I clear Minimum Rotation[90m             # features/step_definitions/mainPage_steps.rb:187[0m[0m
+[31m      Unable to find field "minRotation" (Capybara::ElementNotFound)[0m
+[31m      ./features/step_definitions/mainPage_steps.rb:188:in `/^I clear Minimum Rotation$/'[0m
+[31m      features/collagePage.feature:64:in `When I clear Minimum Rotation'[0m
+    [36mAnd click on the set options button[90m       # features/step_definitions/mainPage_steps.rb:131[0m[0m
+    [36mThen the collage options box remains open[90m # features/step_definitions/collagePage_steps.rb:53[0m[0m
+
+  Scenario: Not Enough Images[90m                                  # features/collagePage.feature:19[0m
+    [32mWhen I generate a collage for "[32m[1mejausdnvirnjsad[0m[0m[32m" saying "[32m[1mA[0m[0m[32m"[90m # features/step_definitions/mainPage_steps.rb:159[0m[0m
+    [32mAnd wait 60 seconds[90m                                        # features/step_definitions/mainPage_steps.rb:151[0m[0m
+    [31mThen a not enough images message is displayed[90m              # features/step_definitions/collagePage_steps.rb:49[0m[0m
+[31m      expected to find css "#error" but there were no matches (RSpec::Expectations::ExpectationNotMetError)[0m
+[31m      ./features/step_definitions/collagePage_steps.rb:50:in `/^a not enough images message is displayed$/'[0m
+[31m      features/collagePage.feature:23:in `Then a not enough images message is displayed'[0m
+
+  Scenario: Empty Collage Border Color[90m        # features/collagePage.feature:44[0m
+    [31mWhen I clear Collage Border Color[90m         # features/step_definitions/mainPage_steps.rb:175[0m[0m
+[31m      Unable to find field "collageBorderColor" (Capybara::ElementNotFound)[0m
+[31m      ./features/step_definitions/mainPage_steps.rb:176:in `/^I clear Collage Border Color$/'[0m
+[31m      features/collagePage.feature:46:in `When I clear Collage Border Color'[0m
+    [36mAnd click on the set options button[90m       # features/step_definitions/mainPage_steps.rb:131[0m[0m
+    [36mThen the collage options box remains open[90m # features/step_definitions/collagePage_steps.rb:53[0m[0m
+
+  Scenario: Collage History Gallery[90m          # features/collagePage.feature:25[0m

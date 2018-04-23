@@ -88,11 +88,13 @@
 					<input type="text" class="form-control" id="searchtext" placeholder="Enter topic">
 					<input type="text" class="form-control" id="shapetext" placeholder="Enter shape">
 				</div>
+				<div class="loadAnimation"><h1 style="color:rgba(0,0,0,0);" >loading</h1></div>
 				<div id="button-container">
 					<button id="searchbutton" class="btn btn-primary">Build Collage</button>
 					<button id="export" class="btn btn-primary">Export Collage</button>
 					<button id="optionbutton" class="btn btn-primary">Options</button>
 					<button id="savebutton" class="btn btn-primary">Save Collage</button>
+					<button id="deletebutton" class ="btn btn-primary">Delete Collage</button>
 				</div>
 			</div>
 			<div id="previous-container">

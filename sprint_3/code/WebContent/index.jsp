@@ -30,6 +30,7 @@
 				<input type="text" id="searchtext" class="form-control" placeholder="Enter topic">
 				<input type="text" id="shapetext" class="form-control" placeholder="Enter shape">	
 			</div>
+			<div class="loadAnimation"><h1 style="color:rgba(0,0,0,0);" >loading</h1></div>
 			<div id="search-button-container">
 				<button id="searchbutton" class="btn btn-primary">Build Collage</button>	
 				<button id="optionbutton" class="btn btn-primary">Options</button>
