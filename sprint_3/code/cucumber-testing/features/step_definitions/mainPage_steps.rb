@@ -101,9 +101,18 @@ When(/^enter "([^"]*)" for collage height$/) do |arg1|
   fill_in('collageHeight', :with => arg1)
 end
 
-When(/^select "([^"]*)" for filter$/) do |arg1|
-  fill_in('filter', :with => arg1)
+When(/^select "Black and White" for filter$/) do
+  choose('bnw')
 end
+
+When(/^select "Greyscale" for filter$/) do
+  choose('greyscale')
+end
+
+When(/^select "Sepia" for filter$/) do
+  choose('sepia')
+end
+
 Then(/^there is a title$/) do
   expect(page).to have_css('#title')
 end
@@ -201,13 +210,17 @@ When(/^I clear Collage Height$/) do
 end
 
 When(/^I clear Filter$/) do
-  fill_in('filter', :with => "")
+  choose('nofilter')
 end
 
 Then(/^collage options is open$/) do
   expect(page).to have_css('.vex-dialog-input')
 end
 
+Then(/^collage options is closed$/) do
+  expect(page).not_to have_css('.vex-dialog-input')
+end
+
 Then(/^a loading animation appears$/) do
-  expect(page).to have_css('#animation')
+  expect(page).to have_content('loading')
 end

@@ -40,6 +40,16 @@ let clickedCollageIndex = -1;
 // Attach the event listener here
 $(document).ready( () => {
 	
+<<<<<<< HEAD
+	// Animation setup
+	$body = $("body");
+	$(document).on({
+		ajaxStart: function() { $body.addClass("loading"); },
+		ajaxStop: function() { $body.removeClass("loading"); }
+	});
+	
+=======
+>>>>>>> fae4a804abbbe5a32dcd0dbc1a6c8b36e521ba49
     // Gets the reference to the div for the error message
     let error = $('#error')[0];
 
@@ -272,6 +282,23 @@ let showOptions = () => {
      *  - private String filter; 
      */
     let collageBorderWidthInput = '<label>Collage Border Width</label>' + 
+<<<<<<< HEAD
+                                  '<input name="collageBorderWidth" type="text" value="0" required/>';
+    let collageBorderColorInput = '<label>Collage Border Color</label>' + 
+                                  '<input name="collageBorderColor" type="text" value="white" required/>';
+    let photoBorderWidthInput = '<label>Photo Border Width</label>' + 
+                                '<input name="photoBorderWidth" type="text" value="0" required/>';
+    let photoBorderColorInput = '<label>Photo Border Color</label>' + 
+                                '<input name="photoBorderColor" type="text" value="white" required/>';
+    let minRotationInput = '<label>Minimum Rotation</label>' + 
+                           '<input name="minRotation" type="text" value="-45" required/>';
+    let maxRotationInput = '<label>Maxium Rotation</label>' + 
+                           '<input name="maxRotation" type="text" value="45" required/>';
+    let collageWidthInput = '<label>Collage Width</label>' + 
+                            '<input name="collageWidth" type="text" value="800" required/>';
+    let collageHeightInput = '<label>Collage Height</label>' + 
+                             '<input name="collageHeight" type="text" value="600" required/>';
+=======
                                   '<input name="collageBorderWidth" type="text" value="0" />';
     let collageBorderColorInput = '<label>Collage Border Color</label>' + 
                                   '<input name="collageBorderColor" type="text" value="" />';
@@ -287,6 +314,7 @@ let showOptions = () => {
                             '<input name="collageWidth" type="text" value="800" />';
     let collageHeightInput = '<label>Collage Height</label>' + 
                              '<input name="collageHeight" type="text" value="600"/>';
+>>>>>>> fae4a804abbbe5a32dcd0dbc1a6c8b36e521ba49
     let filterInput =   '<label>Filter</label>' + 
                         '<div>' +
                             '<input type="radio" id="bnw" name="filter"  value="blacknwhite">' +
@@ -295,6 +323,8 @@ let showOptions = () => {
                             '<label id="greyscale-label" for="greyscale">Greyscale</label>' +
                             '<input type="radio" id="sepia" name="filter"  value="sepia">' +
                             '<label id="sepia-label" for="sepia">Sepia</label>' +
+                            '<input type="radio" id="nofilter" name="filter"  value="" checked>' +
+                            '<label id="nofilter-label" for="nofilter">None</label>' +
                         '</div>';
 
     vex.dialog.open({

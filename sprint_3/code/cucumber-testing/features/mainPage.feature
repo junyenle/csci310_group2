@@ -9,30 +9,40 @@ Scenario: Empty Collage Border Width, Empty Collage Border Color, Empty Photo Bo
 	And I clear Collage Border Width
 	And click on the set options button
 	Then collage options is open
+	And enter "0" for collage border width
 	And I clear Collage Border Color
 	And click on the set options button
 	Then collage options is open
+	And enter "white" for collage border color
 	And I clear Photo Border Width
 	And click on the set options button
 	Then collage options is open
+	And enter "0" for photo border width
 	And I clear Photo Border Color
 	And click on the set options button
 	Then collage options is open
+	And enter "white" for photo border color
 	And I clear Minimum Rotation
 	And click on the set options button
 	Then collage options is open
+	And enter "45" for minimum rotation
 	And I clear Maximum Rotation
 	And click on the set options button
 	Then collage options is open
+	And enter "45" for maximum rotation
 	And I clear Collage Width
 	And click on the set options button
 	Then collage options is open
+	And enter "1000" for collage width
 	And I clear Collage Height
 	And click on the set options button
 	Then collage options is open
+	And enter "800" for collage height
 	And I clear Filter
 	And click on the set options button
-	Then collage options is open
+	And click on the build collage button
+	And wait 30 seconds
+	Then there is a collage with those features
 
 Scenario: Placeholder Text
 	
@@ -294,6 +304,40 @@ Scenario: Collage with No Collage Border, No Photo Border, 45 Rotation, 800x600 
 	And wait 30 seconds
 	Then there is a collage with those features
 
+Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and Greyscale Filter
+
+	When I enter "cat" in the input
+	And enter "A" for collage shape
+	And I click on the options button
+	And enter "0" for collage border width
+	And enter "white" for collage border color
+	And enter "0" for photo border width
+	And enter "white" for photo border color
+	And enter "-35" for minimum rotation
+	And enter "35" for maximum rotation
+	And select "Greyscale" for filter
+	And click on the set options button
+	And click on the build collage button
+	And wait 30 seconds
+	Then there is a collage with those features
+
+Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and Sepia Filter
+
+	When I enter "cat" in the input
+	And enter "A" for collage shape
+	And I click on the options button
+	And enter "0" for collage border width
+	And enter "white" for collage border color
+	And enter "0" for photo border width
+	And enter "white" for photo border color
+	And enter "-35" for minimum rotation
+	And enter "35" for maximum rotation
+	And select "Sepia" for filter
+	And click on the set options button
+	And click on the build collage button
+	And wait 30 seconds
+	Then there is a collage with those features
+
 Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and Black and White Filter
 
 	When I enter "cat" in the input
@@ -531,6 +575,8 @@ Scenario: Empty Collage Shape
 	Then I stay on the Main Page
 
 Scenario: Loading Animation
-	And I generate a collage for "shark" saying "A"
+	When I enter "cat" in the input
+	And enter "A" for collage shape
+	And click the build collage button
 	Then a loading animation appears
 

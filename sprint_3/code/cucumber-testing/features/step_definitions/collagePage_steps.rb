@@ -5,7 +5,7 @@ Given(/^I navigate to the Collage Page$/) do
   click_button('Options')
   click_button('Set Options')
   click_button('Build Collage')
-  sleep(60)
+  sleep(30)
 end
 
 Then(/^there is an export button$/) do
@@ -33,6 +33,8 @@ end
 Then(/^the saved image appears in the collage history gallery$/) do
   expect(page.find('.prev-collage')['alt']).to match("cat")
 end
+
+
 
 Then(/^there is a collage history gallery$/) do
   expect(page).to have_css('#prev')
@@ -62,7 +64,7 @@ When(/^there is a collage in the history gallery$/) do
     click_button('Options')
     click_button('Set Options')
     click_button('Build Collage')
-    sleep(60)
+    sleep(30)
   end
 end
 
@@ -82,6 +84,26 @@ Then(/^the collage is deleted from the gallery$/) do
   expect(page).to have_no_content("img[alt='cat']")
 end
 
+Then(/^there is no whales collage$/) do
+  expect(page).to have_no_content("img[alt='whales']")
+end
+
+When(/^I click on the "([^"]*)" image$/) do |arg1|
+  find("img[alt='"+arg1+"']").click
+end
+
+Then(/^there is no "([^"]*)" image$/) do |arg1|
+  expect(page).to have_no_content("img[alt='"+arg1+"']")
+end
+
+Then(/^there is a "([^"]*)" image$/) do |arg1|
+  expect(page).to have_content("img[alt='"+arg1+"']")
+end
+
+Then(/^there is a whales collage$/) do
+  expect(page).to have_content("img[alt='cat']")
+end
+
 When(/^I click the download as PDF button$/) do
   click_button('Export PDF')
 end
@@ -90,25 +112,33 @@ Then(/^a PDF collage is downloaded$/) do
   page.driver.response.headers['Content-Disposition'].should include("filename=*\".pdf\"")
 end
 
-When(/^I set a "([^"]*)" filter$/) do |arg1|
-  click_button('Options')
-  fill_in('filter', :with => arg1)
-  click_button('Set Options')
+When(/^I set a "Black and White" filter$/) do
+  choose('bnw')
+end
+
+When(/^I set a "Greyscale" filter$/) do
+  choose('greyscale')
+end
+
+When(/^I set a "Sepia" filter$/) do
+  choose('sepia')
 end
 
 Then(/^the collage is Black and White$/) do
   expect(page).to have_css('.blackandwhite')
 end
 
-Then(/^the collage is Grayscale$/) do
-  expect(page).to have_css('.grayscale')
+Then(/^the collage is Greyscale$/) do
+  expect(page).to have_css('.greyscale')
 end
 
 Then(/^the collage is Sepia$/) do
   expect(page).to have_css('.sepia')
 end
 
-
+When(/^I reload the page$/) do
+  page.evaluate_script("window.location.reload()")
+end
 
 
 
