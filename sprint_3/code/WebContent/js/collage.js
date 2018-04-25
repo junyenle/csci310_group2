@@ -4,24 +4,19 @@
  */
 
 /**
- * TODO:
- * - Add more functionality to the save collage button
- * - Apply requested changes to the options menu
- * - Prevent the user from going straight to other pages without
- *   logging in
- * - Use encryption aka HTTPS
- * - Allow it to not set any options
- * - Find and add error handling
- * - Get the delete functionality working + AJAX call
- * - Add the dropdown menu with these inputs
- *      - With options: Black and White, Sepia, Greyscale
- *      - Send these inputs: blacknwhite, greyscale, and sepia
+ * TODO: - Add more functionality to the save collage button - Apply requested
+ * changes to the options menu - Prevent the user from going straight to other
+ * pages without logging in - Use encryption aka HTTPS - Allow it to not set any
+ * options - Find and add error handling - Get the delete functionality working +
+ * AJAX call - Add the dropdown menu with these inputs - With options: Black and
+ * White, Sepia, Greyscale - Send these inputs: blacknwhite, greyscale, and
+ * sepia
  */
 
 // Flag to tell us that the collage could not be generated
 let fail = false;
 
-// Option data that the user wants to do 
+// Option data that the user wants to do
 let optionData = {
     collageBorderWidth: "0",
     collageBorderColor: "",
@@ -40,7 +35,6 @@ let clickedCollageIndex = -1;
 // Attach the event listener here
 $(document).ready( () => {
 	
-<<<<<<< HEAD
 	// Animation setup
 	$body = $("body");
 	$(document).on({
@@ -48,8 +42,6 @@ $(document).ready( () => {
 		ajaxStop: function() { $body.removeClass("loading"); }
 	});
 	
-=======
->>>>>>> fae4a804abbbe5a32dcd0dbc1a6c8b36e521ba49
     // Gets the reference to the div for the error message
     let error = $('#error')[0];
 
@@ -60,6 +52,12 @@ $(document).ready( () => {
     else {
         $('#export').attr("disabled", false);
     }
+    if (error != null) {
+        $('#pdf').attr("disabled", true);
+    }
+    else {
+        $('#pdf').attr("disabled", false);
+    }
     
     // By default, disable delete button
     $('#deletebutton').attr("disabled", true);
@@ -69,6 +67,7 @@ $(document).ready( () => {
 
     // Export collage on button click
     $('#export').click(downloadImage);
+    $('#pdf').click(downloadPDF);
 
     // Display the options button
     $('#optionbutton').click(showOptions);
@@ -134,7 +133,8 @@ let swapCollage = function(prev) {
         $(collage).html(""); 
         collage.appendChild(newImage);
 
-        // Remove the event handler and the previous collage since it's not necessary
+        // Remove the event handler and the previous collage since it's not
+		// necessary
         $(prevCollage).off('click');
         $(collage).removeChild(prevCollage);
 
@@ -177,7 +177,7 @@ let downloadImage = () => {
     let main = $('#main')[0];
 
     // Create the temporary a tag
-    let a = $("<a>").attr("href",main.src).attr("download", main.alt+" collage.png").appendTo("body");
+    let a = $("<a>").attr("href",main.src).attr("download", main.alt+".png").appendTo("body");
     a[0].click();
     a.remove();
 }
@@ -221,7 +221,7 @@ let buildCollage = () => {
         success: (response) => {
             let res = response.split(" ");
             if (res[0] == "success") {
-                //location.reload();
+                // location.reload();
                 fail = false;
             }
             else {
@@ -270,19 +270,13 @@ let buildCollage = () => {
 let showOptions = () => {
 
     /**
-     *  Varables for dataOptions
-     *  - private int collageBorderWidth;
-     *  - private String collageBorderColor;
-     *  - private int photoBorderWidth;
-     *  - private String photoBorderColor;
-     *  - private int minRotation;
-     *  - private int maxRotation;
-     *  - private int collageWidth;
-     *  - private int collageHeight;
-     *  - private String filter; 
-     */
+	 * Varables for dataOptions - private int collageBorderWidth; - private
+	 * String collageBorderColor; - private int photoBorderWidth; - private
+	 * String photoBorderColor; - private int minRotation; - private int
+	 * maxRotation; - private int collageWidth; - private int collageHeight; -
+	 * private String filter;
+	 */
     let collageBorderWidthInput = '<label>Collage Border Width</label>' + 
-<<<<<<< HEAD
                                   '<input name="collageBorderWidth" type="text" value="0" required/>';
     let collageBorderColorInput = '<label>Collage Border Color</label>' + 
                                   '<input name="collageBorderColor" type="text" value="white" required/>';
@@ -298,23 +292,6 @@ let showOptions = () => {
                             '<input name="collageWidth" type="text" value="800" required/>';
     let collageHeightInput = '<label>Collage Height</label>' + 
                              '<input name="collageHeight" type="text" value="600" required/>';
-=======
-                                  '<input name="collageBorderWidth" type="text" value="0" />';
-    let collageBorderColorInput = '<label>Collage Border Color</label>' + 
-                                  '<input name="collageBorderColor" type="text" value="" />';
-    let photoBorderWidthInput = '<label>Photo Border Width</label>' + 
-                                '<input name="photoBorderWidth" type="text" value="0" />';
-    let photoBorderColorInput = '<label>Photo Border Color</label>' + 
-                                '<input name="photoBorderColor" type="text" value="" />';
-    let minRotationInput = '<label>Minimum Rotation</label>' + 
-                           '<input name="minRotation" type="text" value="-45" />';
-    let maxRotationInput = '<label>Maxium Rotation</label>' + 
-                           '<input name="maxRotation" type="text" value="45" />';
-    let collageWidthInput = '<label>Collage Width</label>' + 
-                            '<input name="collageWidth" type="text" value="800" />';
-    let collageHeightInput = '<label>Collage Height</label>' + 
-                             '<input name="collageHeight" type="text" value="600"/>';
->>>>>>> fae4a804abbbe5a32dcd0dbc1a6c8b36e521ba49
     let filterInput =   '<label>Filter</label>' + 
                         '<div>' +
                             '<input type="radio" id="bnw" name="filter"  value="blacknwhite">' +
@@ -327,6 +304,7 @@ let showOptions = () => {
                             '<label id="nofilter-label" for="nofilter">None</label>' +
                         '</div>';
 
+    // Open the vex dialog that will get the users data input
     vex.dialog.open({
         message: 'Please select all the options for these collages',
         input: [
@@ -406,4 +384,29 @@ let deleteCollage = () => {
             }
         });
     } 
+}
+
+// Download the collage as a PDF
+let downloadPDF = () => {
+    
+    // Get the main img collage
+    let main = $('#main')[0];
+
+    let margin = 60;
+    
+    let docDefinition = {
+    	pageSize: {
+    		width: main.width + margin,
+    		height: main.height + margin
+    	},
+    	// pageOrientation: 'landscape',
+    	pageMargins: 0,
+        content: [
+            {
+                image: main.src
+            }
+        ]
+    };
+    let name = $('#main')[0].alt + ".pdf";
+    pdfMake.createPdf(docDefinition).download(name);
 }

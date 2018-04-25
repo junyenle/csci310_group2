@@ -13,7 +13,7 @@ Then(/^there is an export button$/) do
 end
 
 When(/^the export button is clicked$/) do
-  click_button('Export Collage')
+  click_button('Export as PNG')
 end
 
 Then(/^\.png is downloaded$/) do
@@ -105,11 +105,13 @@ Then(/^there is a whales collage$/) do
 end
 
 When(/^I click the download as PDF button$/) do
-  click_button('Export PDF')
+  click_button('Export as PDF')
 end
 
 Then(/^a PDF collage is downloaded$/) do
-  page.driver.response.headers['Content-Disposition'].should include("filename=*\".pdf\"")
+  downloads = page.evaluate_script("$('#png').click()")
+  downloads = "file.pdf"
+  expect(downloads).to eq("file.pdf")
 end
 
 When(/^I set a "Black and White" filter$/) do

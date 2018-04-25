@@ -38,12 +38,32 @@ body {
 	margin-bottom: 10px;
 }
 
+/* LOAD ANIMATION */
+.loadAnimation {
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	border: 8px solid #d3d3d3;
+	border-top: 8px solid #777777;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	animation: spin 1s linear infinite;
+}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% {transform: rotate(360deg); }
+}
+body.loading .loadAnimation {
+	overflow: hidden;
+}
+body.loading .loadAnimation {
+	display: block;
+}
+
 /* MAIN COLLAGE */
 #main {
-	min-width: 800px;
-	min-height: 600px;
-	width: 40vw;
-	height: 50vh;
 	margin: 0;
 }
 
@@ -68,10 +88,15 @@ body {
 }
 
 /* EXPORT, SEARCH, SAVE, AND OPTION BUTTON */
-#export, #searchbutton, #optionbutton, #savebutton {
+#export, #searchbutton, 
+#optionbutton, #savebutton,
+#deletebutton, #pdf
+{
+	font-size: 15px;
+    padding: 3px;
 	display: inline-block;
 	margin: auto;
-	margin-left: 5px;
+	margin-left: 2px;
 	background-color: #777777;
 	border: 2px solid #777777;	
 }
@@ -79,7 +104,7 @@ body {
 /* SEARCH AND SHAPE TEXT*/
 #searchtext, #shapetext {
 	border: 2px solid #777777;
-	font-size: 16px;
+	font-size: 15px;
 }
 
 /* PREVIOUS CONTAINER */
@@ -123,4 +148,16 @@ body {
 	height: 98%;
 	margin-right: 5px;
 	margin-left: 5px;
+}
+
+/* OPTION RADIO BUTTON FIX */
+#bnw, #greyscale, #sepia {
+	margin: 5px;
+}
+
+/* LABEL FIX */
+#bnw-label, #greyscale-label, 
+#sepia-label
+{
+	margin: 5px;
 }

@@ -25,6 +25,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		
 		<!-- FRONTEND -->
+		<script src="js/pdfmake.min.js"></script>
+		<script src="js/vfs_fonts.js"></script>
 		<script src="js/collage.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles/collage.css">
 	</head>
@@ -91,7 +93,8 @@
 				<div class="loadAnimation"><h1 style="color:rgba(0,0,0,0);" >loading</h1></div>
 				<div id="button-container">
 					<button id="searchbutton" class="btn btn-primary">Build Collage</button>
-					<button id="export" class="btn btn-primary">Export Collage</button>
+					<button id="export" class="btn btn-primary">Export as PNG</button>
+					<button id="pdf" class="btn btn-primary">Export as PDF</button>
 					<button id="optionbutton" class="btn btn-primary">Options</button>
 					<button id="savebutton" class="btn btn-primary">Save Collage</button>
 					<button id="deletebutton" class ="btn btn-primary">Delete Collage</button>
