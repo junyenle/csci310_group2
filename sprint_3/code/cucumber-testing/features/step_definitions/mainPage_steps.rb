@@ -1,5 +1,5 @@
 Given(/^I navigate to the Main Page$/) do
-  visit "http://localhost:8080/CS310-ProjectTwo/login.jsp"
+  visit "https://localhost:8444/CS310-ProjectTwo/login.jsp"
   fill_in('username', :with => "username")
   fill_in('password', :with => "password")
   click_button('Log In')

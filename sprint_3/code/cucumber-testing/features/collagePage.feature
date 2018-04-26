@@ -20,7 +20,7 @@ Scenario: Save Collage Button
 Scenario: Not Enough Images
 	
 	When I generate a collage for "ejausdnvirnjsad" saying "A"
-	And wait 30 seconds
+	And wait 40 seconds
 	And I reload the page
 	Then a not enough images message is displayed
 
@@ -33,7 +33,7 @@ Scenario: Collage History Gallery
 	And click on the collage options button
 	And click on the set options button
 	And click the build collage button
-	And wait 60 seconds
+	And wait 40 seconds
 	And click on a previously saved image
 	Then the previous collage should display
 
@@ -76,7 +76,7 @@ Scenario: Empty Collage Border Width, Empty Collage Border Color, Empty Photo Bo
 	And I clear Filter
 	And click on the set options button
 	And click on the build collage button
-	And wait 30 seconds
+	And wait 40 seconds
 	Then there is a collage with those features
 
 
@@ -111,7 +111,7 @@ Scenario: Persistent History and User-Specific History
 	And I enter "password" in the password box
 	And click the login button
 	And I generate a collage for "dog" saying "A"
-	And wait 30 seconds
+	And wait 40 seconds
 	And I reload the page
 	And I click the save collage button
 	And I reload the page
@@ -120,7 +120,7 @@ Scenario: Persistent History and User-Specific History
 	And I enter "password" in the password box
 	And click the login button
 	And I generate a collage for "shark" saying "C" 
-	And wait 30 seconds
+	And wait 40 seconds
 	And I reload the page
 	Then there is no "dog" image
 	And I am on the login page
@@ -128,7 +128,7 @@ Scenario: Persistent History and User-Specific History
 	And I enter "password" in the password box
 	And click the login button
 	And I generate a collage for "shark" saying "C" 
-	And wait 30 seconds
+	And wait 40 seconds
 	And I reload the page
 	Then the collage history gallery is not empty
 	 
@@ -139,13 +139,13 @@ Scenario: Deleting from History
 	And I enter "password" in the password box
 	And click the login button
 	And I generate a collage for "usc" saying "C"
-	And wait 30 seconds
+	And wait 40 seconds
 	And I reload the page
 	And I click the save collage button
 	And I reload the page
 	Then the collage history gallery is not empty
 	And I generate a collage for "ucla" saying "C"
-	And wait 30 seconds
+	And wait 40 seconds
 	And I reload the page
 	Then the collage history gallery is not empty
 	And I click on the "usc" image

@@ -142,6 +142,11 @@ public class CollageBuilder {
 					// rotate image
 					int min = options.getMinRotation();
 					int max = options.getMaxRotation();
+					if(max < min)
+					{
+						min = (min < 0)? min:-min;
+						max = (max > 0)? max:-max;
+					}
 					Random randomRotator = new Random();
 					int randNum = randomRotator.nextInt((max - min) + 1) + min;
 					nextImage = rotateImage(nextImage, randNum);

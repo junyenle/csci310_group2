@@ -24,10 +24,10 @@ public class ImageSourcer {
 	}
 
 	// configuration variables
-	private final String API_KEY = "AIzaSyAiC3kiN4NtdABasdpkFTuaSiwR9x41COE".toString(); // this is an API key provided
+	private final String GOOGLE_API_URL = "https://www.googleapis.com/customsearch".toString();
+	private final String API_KEY = "AIzaSyCIbkNO0A14MwHJTYsKI8x_kN5RzoiRehw".toString(); // this is an API key provided
 																							// by Google
 	/* spare keys:
-	 * maybe expended?
 		AIzaSyDl6T1itQ1cmgBR0dOCnI7KPWbdnwuSGUg
 		AIzaSyCMLFYK6VlsPwvUKIwB2MvHvWJ_Pf-QAn4
 		AIzaSyARWguCMARs26vivRF2GgFooxtEAchKS7k
@@ -35,20 +35,27 @@ public class ImageSourcer {
 		AIzaSyDivyRLZnzGZaPzeIV829ifsGXWiUlLhaY
 		AIzaSyBm4X1F-sZEC25YYwm6GbpWHG7NqGk_O_U
 		AIzaSyAiC3kiN4NtdABasdpkFTuaSiwR9x41COE
-		
-		expended for sure
 		AIzaSyB_CnB1Lf9SG3kM0a8CX4Mn-XRcQIjuTQs
 		AIzaSyBLF3L9Tg_19Gq2ORSWI0-b82c1M0ksHQ4
 		AIzaSyA_lrl3HmVamJI9VHo_6_DPgzZ1QoXlEtc
+		AIzaSyCgRO1vMrY4q08oDvUVL7crjE2icWQ0QKI
+		AIzaSyCvdLmX1gQtLr1Nf7w4cocmt1_OgHTGjEA
 		
-		bbox saved
-		AIzaSyAOO99UWBvgnUpZLJtADNIrbefgJjn2PQo
+		FRIEND KEYS:
+		(if you're not jun and you use these, prepare to die)
+		AIzaSyArdGl4OGTW0KDDwuKSZJ8vs17wOihOhhw
+		AIzaSyBWzKfZ6J07s_GwafCXINt1bCJ98Fca64E
+		AIzaSyBQ0QCRT6LlM5I3nelNwQaUIrX7tn07gh0
+		AIzaSyDU2LvA5CbXG9khlWgMSsp6-nOn0inFc2c
+		AIzaSyCIZfEJAqT90irqrOHl3eGCom0MEdK-3Jw
 		
-		wbox / demo saved
-		AIzaSyAfNAqIThCs_H_YuvSL2WeqkYHnYYuZMRk
+		MAIN KEY: 
+		AIzaSyBPsi3FoAZjPElpxch04caAtlKlgo-nw8M
+		AIzaSyDSvtf6dM_TMs2mhYWT4qhhBQq_BVoa-Gs	
 		
-		demo saved
-		AIzaSyB-Xal-Ah32dyhBa2tnZ5nZr5mFO4q518g
+		RAIMIBOOKS KEY:
+		AIzaSyCIbkNO0A14MwHJTYsKI8x_kN5RzoiRehw
+		
 	*/
 	private final String SEARCH_ENGINE_KEY = "004843956391315063069:wnj8zpugysm".toString(); // this is a custom search
 																								// engine key provided
@@ -197,7 +204,7 @@ public class ImageSourcer {
 				// parameter details
 				HttpURLConnection conn = null;
 				try {
-					URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + key + "&cx=" + cx + "&q="
+					URL url = new URL(GOOGLE_API_URL + "/v1?key=" + key + "&cx=" + cx + "&q="
 							+ qry + "&fileType=" + fileType + "&searchType=" + searchType + "&alt=json&start="
 							+ startIndex);
 					conn = (HttpURLConnection) url.openConnection();

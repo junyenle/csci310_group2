@@ -7,7 +7,10 @@ import static org.junit.Assert.fail;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Vector;
 
 import org.junit.Before;
@@ -36,12 +39,113 @@ public class CollageManagerTests {
 		}
 		System.out.println("PASS: testInitiallyEmpty");
 	}
+	
+	@Test
+	public void testManuallyInsertSavedCollage() {
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertSavedCollage("test collage", image);
+		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
+			System.out.println("FAIL: testManuallyInsertSavedCollage");
+			fail("Save Collage fail.");
+		}
+		assertTrue(collageManager.getSavedCollageTitles().get(0).equals("test collage"));
+		System.out.println("PASS: testManuallyInsertSavedCollage");
+	}
 
+	@Test
+	public void testDeleteCollageCollageExists() {
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertSavedCollage("test collage", image);
+		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
+			System.out.println("FAIL: testDeleteCollageCollageExists");
+			fail("Save Collage fail.");
+		}
+		assertTrue(collageManager.getSavedCollageTitles().get(0).equals("test collage"));
+		int numCollages = collageManager.getSavedCollages().size();
+		numCollages -= 1;
+		if(numCollages == -1)
+		{
+			numCollages = 0;
+		}
+		collageManager.deleteCollage("wboxtesteronecollage", 0);
+		if (collageManager.getSavedCollages().size() == numCollages || collageManager.getSavedCollageTitles().size() == numCollages) {
+			System.out.println("PASS: testDeleteCollageCollageExists");
+			return;
+		}
+		fail("Delete Collage fail.");
+	}
+	
+	@Test
+	public void testDeleteCollageCollagesExist() {
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertSavedCollage("test collage", image);
+		collageManager.insertSavedCollage("test collage", image);
+		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
+			System.out.println("FAIL: testDeleteCollageCollagesExist");
+			fail("Save Collage fail.");
+		}
+		assertTrue(collageManager.getSavedCollageTitles().get(0).equals("test collage"));
+		int numCollages = collageManager.getSavedCollages().size();
+		numCollages -= 1;
+		if(numCollages == -1)
+		{
+			numCollages = 0;
+		}
+		collageManager.deleteCollage("wboxtestermultiplecollages", 0);
+		if (collageManager.getSavedCollages().size() == numCollages || collageManager.getSavedCollageTitles().size() == numCollages) {
+			System.out.println("PASS: testDeleteCollageCollagesExist");
+			return;
+		}
+		fail("Delete Collage fail.");
+	}
+
+	@Test
+	public void testDeleteCollageNoCollagesExist() {
+		int numCollages = collageManager.getSavedCollages().size();
+		numCollages -= 1;
+		if(numCollages == -1)
+		{
+			numCollages = 0;
+		}
+		collageManager.deleteCollage("wboxtesternocollages", 0);
+		if (collageManager.getSavedCollages().size() == numCollages || collageManager.getSavedCollageTitles().size() == numCollages) {
+			System.out.println("PASS: testDeleteCollageNoCollagesExist");
+			return;
+		}
+		fail("Delete Collage fail.");
+	}
+	
+	@Test
+	public void testDeleteCollageUnknownUser() {
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertSavedCollage("test collage", image);
+		collageManager.insertSavedCollage("test collage", image);
+		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
+			System.out.println("FAIL: testDeleteCollageCollagesExist");
+			fail("Save Collage fail.");
+		}
+		assertTrue(collageManager.getSavedCollageTitles().get(0).equals("test collage"));
+		int numCollages = collageManager.getSavedCollages().size();
+		numCollages -= 1;
+		if(numCollages == -1)
+		{
+			numCollages = 0;
+		}
+		String username = String.valueOf((int)(Math.random() * 100000000));
+		collageManager.deleteCollage(username, 0);
+		if (collageManager.getSavedCollages().size() == numCollages || collageManager.getSavedCollageTitles().size() == numCollages) {
+			System.out.println("PASS: testDeleteCollageCollagesExist");
+			return;
+		}
+		fail("Delete Collage fail.");
+	}
+	
 	@Test
 	public void testSaveCollage() {
 		BufferedImage image = new BufferedImage(1, 1, 1);
 		collageManager.insertCollage("test collage", image);
-		collageManager.saveCollage();
+		String username = String.valueOf((int)(Math.random() * 100000000));
+		collageManager.saveCollage(username);
 		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
 			System.out.println("FAIL: testSaveCollage");
 			fail("Save Collage fail.");
@@ -49,10 +153,82 @@ public class CollageManagerTests {
 		assertTrue(collageManager.getSavedCollageTitles().get(0).equals("test collage"));
 		System.out.println("PASS: testSaveCollage");
 	}
+	
+	@Test
+	public void testUserSpecificHistory() {
+		String username = String.valueOf((int)(Math.random() * 100000000));
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertCollage("test collage", image);
+		collageManager.saveCollage(username);
+		
+		// check the file itself
+		String filename = "/home/student/Desktop/eclipse/userdata/" + username;
+		String filecontent = "";
+		try {
+			filecontent = new String(Files.readAllBytes(Paths.get(filename)));
+		} catch (IOException e) {
+			System.out.println("FAILED to manage file: " + filename);
+		}
+		String[] data = filecontent.split("\\|");
+		assertTrue(data[0].equals("test collage"));
+		
+		// check against known user jun
+		username = "jun";
+		filename = "/home/student/Desktop/eclipse/userdata/" + username;
+		filecontent = "";
+		try {
+			filecontent = new String(Files.readAllBytes(Paths.get(filename)));
+		} catch (IOException e) {
+			System.out.println("FAILED to manage file: " + filename);
+		}
+		String[] data2 = filecontent.split("\\|");
+		assertTrue(!data2[0].equals("test collage"));
+		
+		System.out.println("PASS: testUserSpecificHistory");
+	}	
+	
+	@Test
+	public void testPersistentHistory() {
+		// check known user jun... whose first collage is about whales
+		String username = "jun";
+		String filename = "/home/student/Desktop/eclipse/userdata/" + username;
+		String filecontent = "";
+		try {
+			filecontent = new String(Files.readAllBytes(Paths.get(filename)));
+		} catch (IOException e) {
+			System.out.println("FAILED to manage file: " + filename);
+		}
+		String[] data = filecontent.split("\\|");
+		assertTrue(!data[0].equals("whales"));
+		
+		System.out.println("PASS: testPersistentHistory");
+	}
+	
+	@Test
+	public void testWipeCollages() {
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertCollage("test collage", image);
+		collageManager.wipeCollages();
+		assertTrue(collageManager.getCollages().isEmpty());
+		System.out.println("PASS: testWipeCollages");
+	}
+	
+	@Test
+	public void testSaveCollageUnknownUser() {
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		collageManager.insertCollage("test collage", image);
+		collageManager.saveCollage("testuser");
+		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
+			System.out.println("FAIL: testSaveCollageUnknownUser");
+			fail("Save Collage fail.");
+		}
+		assertTrue(collageManager.getSavedCollageTitles().get(0).equals("test collage"));
+		System.out.println("PASS: testSaveCollageUnknownUser");
+	}
 
 	@Test
 	public void testSaveCollageNoCollages() {
-		collageManager.saveCollage();
+		collageManager.saveCollage("testuser");
 		if (collageManager.getSavedCollages().isEmpty() && collageManager.getSavedCollageTitles().isEmpty()) {
 			System.out.println("PASS: testSaveCollage");
 			return;
@@ -74,9 +250,9 @@ public class CollageManagerTests {
 		graphics2.fillRect(0, 0, image2.getWidth(), image2.getHeight());
 
 		collageManager.insertCollage("test collage", image);
-		collageManager.saveCollage();
+		collageManager.saveCollage("testuser");
 		collageManager.insertCollage("test collage", image2);
-		collageManager.saveCollage();
+		collageManager.saveCollage("testuser");
 
 		if (collageManager.getSavedCollages().isEmpty() || collageManager.getSavedCollageTitles().isEmpty()) {
 			System.out.println("FAIL: testSaveSameCollage");
@@ -106,11 +282,11 @@ public class CollageManagerTests {
 		graphics3.fillRect(0, 0, image3.getWidth(), image3.getHeight());
 
 		collageManager.insertCollage("test", image);
-		collageManager.saveCollage();
+		collageManager.saveCollage("testuser");
 		collageManager.insertCollage("test", image2);
-		collageManager.saveCollage();
+		collageManager.saveCollage("testuser");
 		collageManager.insertCollage("test", image3);
-		collageManager.saveCollage();
+		collageManager.saveCollage("testuser");
 
 		if (collageManager.getSavedCollages().size() == 3 && collageManager.getSavedCollageTitles().size() == 3) {
 			System.out.println("PASS: testSaveMultipleDifferentCollages");
@@ -375,4 +551,6 @@ public class CollageManagerTests {
 
 	}
 
+	
+	
 }

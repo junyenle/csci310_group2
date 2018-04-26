@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		// parse user input
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -57,11 +57,11 @@ public class LoginServlet extends HttpServlet {
 			try {
 				filecontent = new String(Files.readAllBytes(Paths.get(filename)));
 			} catch (IOException e) {
-				System.out.println("FAILED to manage file: " + filename);
+				// failed to manage file
 			}
 
 			String[] data = filecontent.split("\\|");
-			int length = (data.length % 2 == 0 ? data.length : data.length - 1);
+			int length = data.length-1;
 			System.out.println("discoverd " + length / 2 + " past saved collages");
 			for (int i = 0; i < length; i += 2) {
 				String title = data[i];

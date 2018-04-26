@@ -112,7 +112,6 @@ public class CollageManager {
 				System.out.println("SUCCESSFULLY managed file: " + filename);
 			} catch (final IOException ioe) {
 				// failed to manage file
-				System.out.println("FAILED to manage file: " + filename);
 			}
 
 		} catch (Exception e) {
@@ -149,6 +148,11 @@ public class CollageManager {
 	}
 
 	public boolean deleteCollage(String username, int index) {
+		// safety check
+		if(savedCollages.isEmpty())
+		{
+			return true;
+		}
 		// first, delete collage from data structures
 		savedCollages.remove(index);
 		savedCollageTitles.remove(index);
@@ -162,7 +166,6 @@ public class CollageManager {
 			Files.deleteIfExists(path);
 		} catch (IOException e1) {
 			// file doesn't exist
-			System.out.println("savefile " + filename + " dne");
 		}
 		// now actually rewrite every image
 		for(int i = 0; i < savedCollages.size(); i++) {
@@ -187,7 +190,6 @@ public class CollageManager {
 					System.out.println("SUCCESSFULLY managed file: " + filename);
 				} catch (final IOException ioe) {
 					// failed to manage file
-					System.out.println("FAILED to manage file: " + filename);
 				}
 
 			} catch (Exception e) {

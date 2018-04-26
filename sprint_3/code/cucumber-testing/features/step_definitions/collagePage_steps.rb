@@ -1,5 +1,5 @@
 Given(/^I navigate to the Collage Page$/) do
-  visit "http://localhost:8080/CS310-ProjectTwo/index.jsp"
+  visit "https://localhost:8444/CS310-ProjectTwo/index.jsp"
   fill_in('searchtext', :with => "cat")
   fill_in('shapetext', :with => "A")
   click_button('Options')
@@ -33,8 +33,6 @@ end
 Then(/^the saved image appears in the collage history gallery$/) do
   expect(page.find('.prev-collage')['alt']).to match("cat")
 end
-
-
 
 Then(/^there is a collage history gallery$/) do
   expect(page).to have_css('#prev')

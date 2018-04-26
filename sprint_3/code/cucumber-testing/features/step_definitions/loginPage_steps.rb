@@ -1,5 +1,5 @@
 Given(/^I am on the login page$/) do
-  visit "http://localhost:8080/CS310-ProjectTwo/login.jsp"
+  visit "https://localhost:8444/CS310-ProjectTwo/login.jsp"
 end
 
 Then(/^there is a username box$/) do
