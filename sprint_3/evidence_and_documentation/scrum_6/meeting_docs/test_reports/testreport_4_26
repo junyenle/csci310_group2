@@ -1,0 +1,735 @@
+student@CSC310VM:~/csci310_group2$ cucumber /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature --order=random:12345 --guess
+Feature: Collage Page
+
+  Background:                            # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:3
+    Given I navigate to the Collage Page # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:1
+
+  Scenario: Selecting Sepia filter                # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:99
+    When I click on the options button            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    When I set a "Sepia" filter                   # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:123
+    And click on the set options button           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And I generate a collage for "cat" saying "A" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    Then there is a collage with those features   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Export Button             # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:7
+    Then there is an export button    # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:11
+    When the export button is clicked # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:15
+    Then .png is downloaded           # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:19
+
+  Scenario: Collage History Gallery          # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:27
+    Then there is a collage history gallery  # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:37
+    When I click the save collage button     # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:29
+    And I enter "dog" in the input           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "B" for collage shape          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And click on the collage options button  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:152
+    And click on the set options button      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click the build collage button       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:156
+    And wait 40 seconds                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And click on a previously saved image    # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:41
+    Then the previous collage should display # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:45
+
+  Scenario: Selecting Greyscale filter            # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:91
+    When I click on the options button            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    When I set a "Greyscale" filter               # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:119
+    And click on the set options button           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And I generate a collage for "cat" saying "A" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    Then there is a collage with those features   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Downloading as PDF              # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:155
+    When I click the download as PDF button # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:105
+    Then a PDF collage is downloaded        # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:109
+
+  Scenario: Deleting from History                  # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:135
+    When I am on the login page                    # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:1
+    And I enter "username" in the username box     # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:17
+    And I enter "password" in the password box     # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:21
+    And click the login button                     # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:25
+    And I generate a collage for "usc" saying "C"  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    And wait 40 seconds                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And I reload the page                          # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    And I click the save collage button            # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:29
+    And I reload the page                          # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    Then the collage history gallery is not empty  # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:73
+    And I generate a collage for "ucla" saying "C" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    And wait 40 seconds                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And I reload the page                          # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    Then the collage history gallery is not empty  # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:73
+    And I click on the "usc" image                 # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:89
+    And click the delete button                    # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:77
+    Then there is no "usc" image                   # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:93
+
+  Scenario: Persistent History and User-Specific History # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:107
+    When I am on the login page                          # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:1
+    And I enter "503191" in the username box             # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:17
+    And I enter "password" in the password box           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:21
+    And click the login button                           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:25
+    And I generate a collage for "dog" saying "A"        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    And wait 40 seconds                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And I reload the page                                # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    And I click the save collage button                  # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:29
+    And I reload the page                                # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    And I am on the login page                           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:1
+    And I enter "username" in the username box           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:17
+    And I enter "password" in the password box           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:21
+    And click the login button                           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:25
+    And I generate a collage for "shark" saying "C"      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    And wait 40 seconds                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And I reload the page                                # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    Then there is no "dog" image                         # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:93
+    And I am on the login page                           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:1
+    And I enter "503191" in the username box             # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:17
+    And I enter "password" in the password box           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:21
+    And click the login button                           # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:25
+    And I generate a collage for "shark" saying "C"      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    And wait 40 seconds                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And I reload the page                                # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    Then the collage history gallery is not empty        # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:73
+
+  Scenario: Empty Collage Border Width, Empty Collage Border Color, Empty Photo Border Width, Empty Photo Border Color, Empty Minimum Rotation, Empty Maximum Rotation, Empty Collage Width, Empty Collage Height, Empty Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:41
+    When I click on the options button                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And I clear Collage Border Width                                                                                                                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:180
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "0" for collage border width                                                                                                                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And I clear Collage Border Color                                                                                                                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:184
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "white" for collage border color                                                                                                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And I clear Photo Border Width                                                                                                                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:188
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "0" for photo border width                                                                                                                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And I clear Photo Border Color                                                                                                                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:192
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "white" for photo border color                                                                                                                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And I clear Minimum Rotation                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:196
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "45" for minimum rotation                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And I clear Maximum Rotation                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:200
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "45" for maximum rotation                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And I clear Collage Width                                                                                                                                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:204
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "1000" for collage width                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And I clear Collage Height                                                                                                                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:208
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "800" for collage height                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And I clear Filter                                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:212
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                                                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 40 seconds                                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                                                                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Save Collage Button                   # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:13
+    Then there is a save collage button           # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:25
+    When I click the save collage button          # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:29
+    And I reload the page                         # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    Then the collage history gallery is not empty # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:73
+
+  Scenario: Selecting Black and White filter      # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:83
+    When I click on the options button            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    When I set a "Black and White" filter         # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:115
+    And click on the set options button           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And I generate a collage for "cat" saying "A" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    Then there is a collage with those features   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Not Enough Images                                  # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/collagePage.feature:20
+    When I generate a collage for "ejausdnvirnjsad" saying "A" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    And wait 40 seconds                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    And I reload the page                                      # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:139
+    Then a not enough images message is displayed              # sprint_3/code/cucumber-testing/features/step_definitions/collagePage_steps.rb:49
+
+11 scenarios (11 passed)
+129 steps (129 passed)
+10m22.689s
+
+Randomized with seed 12345
+student@CSC310VM:~/csci310_group2$ cucumber /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature --order=random:12345 --guess
+Feature: Main Page
+
+  Background:                         # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:3
+    Given I navigate to the Main Page # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:1
+
+  Scenario: Collage with a Red Photo Border, No Collage Border, 45 Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:426
+    When I enter "cat" in the input                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Photo Border, Red Collage Border, 45 Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:443
+    When I enter "cat" in the input                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Presence of Input Options               # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:52
+    When I click on the options button              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    Then there is a collage border width text field # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:12
+    Then there is a collage border color text field # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:16
+    Then there is a photo border width text field   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:20
+    Then there is a photo border color text field   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:24
+    Then there is a minimum rotation text field     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:28
+    Then there is a maximum rotation text field     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:32
+    Then there is a collage width text field        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:36
+    Then there is a collage height text field       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:40
+    Then there is a filter dropdown field           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:44
+
+  Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and Sepia Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:324
+    When I enter "cat" in the input                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "-35" for minimum rotation                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "35" for maximum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Sepia" for filter                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:112
+    And click on the set options button                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:89
+    When I enter "cat" in the input                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "-35" for minimum rotation                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "35" for maximum rotation                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, No Rotation, 1000x800 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:201
+    When I enter "cat" in the input                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And click on the set options button                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Insufficient Number of Images Found                # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:65
+    When I enter "asdjbaigdhab" in the input                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And click the build collage button                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:156
+    And wait 30 seconds                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is an insufficient number of images found error # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:52
+
+  Scenario: Empty Collage Border Width, Empty Collage Border Color, Empty Photo Border Width, Empty Photo Border Color, Empty Minimum Rotation, Empty Maximum Rotation, Empty Collage Width, Empty Collage Height, Empty Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:6
+    When I click on the options button                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And I clear Collage Border Width                                                                                                                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:180
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "0" for collage border width                                                                                                                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And I clear Collage Border Color                                                                                                                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:184
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "white" for collage border color                                                                                                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And I clear Photo Border Width                                                                                                                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:188
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "0" for photo border width                                                                                                                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And I clear Photo Border Color                                                                                                                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:192
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "white" for photo border color                                                                                                                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And I clear Minimum Rotation                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:196
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "45" for minimum rotation                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And I clear Maximum Rotation                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:200
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "45" for maximum rotation                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And I clear Collage Width                                                                                                                                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:204
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "1000" for collage width                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And I clear Collage Height                                                                                                                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:208
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    Then collage options is open                                                                                                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:216
+    And enter "800" for collage height                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And I clear Filter                                                                                                                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:212
+    And click on the set options button                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                                                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                                                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                                                                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, 45 Degree Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:73
+    When I enter "cat" in the input                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, Red Photo Border, 45 Rotation, 1000x800 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:255
+    When I enter "cat" in the input                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And click on the set options button                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage Options Button is Pressed  # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:544
+    When I click on the collage options button # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:136
+    And click on the set options button        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+
+  Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:341
+    When I enter "cat" in the input                                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "-35" for minimum rotation                                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "35" for maximum rotation                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Photo Border, Red Collage Border, No Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:137
+    When I enter "cat" in the input                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, 45 Rotation, 1000x800 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:479
+    When I enter "cat" in the input                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And select "Black and White" for filter                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Collage Border, No Photo Border, 45 Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:409
+    When I enter "cat" in the input                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Collage Border, No Photo Border, No Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:358
+    When I enter "cat" in the input                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Photo Border, No Collage Border, No Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:121
+    When I enter "cat" in the input                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Collage Border, No Photo Border, No Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:105
+    When I enter "cat" in the input                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, Red Photo Border, 45 Rotation, 1000x800 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:517
+    When I enter "cat" in the input                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And select "Black and White" for filter                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Photo Border, No Collage Border, 45 Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:169
+    When I enter "cat" in the input                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, 45 Rotation, 1000x800 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:219
+    When I enter "cat" in the input                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And click on the set options button                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Photo Border, Red Collage Border, 45 Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:185
+    When I enter "cat" in the input                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Build Collage Button is Pressed # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:549
+    When I enter "cat" in the input         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And click on the collage options button # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:152
+    And click on the set options button     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click the build collage button      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:156
+    And wait 60 seconds                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:160
+    Then I am on the Collage Page           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:164
+
+  Scenario: Collage with No Collage Border, No Photo Border, -35 to 35 Degree Rotation, 800x600 Dimensions, and Greyscale Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:307
+    When I enter "cat" in the input                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "-35" for minimum rotation                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "35" for maximum rotation                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Greyscale" for filter                                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:108
+    And click on the set options button                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, No Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:273
+    When I enter "cat" in the input                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Presence of Website title, Topic input box, Collage shape input box, Build collage button and Collage options button # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:536
+    Then there is a title                                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:116
+    Then there is a topic input box                                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:120
+    Then there is a collage shape input box                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:124
+    Then there is a build collage button                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:128
+    Then there is a collage options button                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:132
+
+  Scenario: Collage with a Red Photo Border, Red Collage Border, No Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:392
+    When I enter "cat" in the input                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Collage Border, No Photo Border, 45 Rotation, 800x600 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:153
+    When I enter "cat" in the input                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And click on the set options button                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with Red Collage Border, No Photo Border, 45 Rotation, 1000x800 Dimensions, and No Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:237
+    When I enter "cat" in the input                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And click on the set options button                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, No Rotation, 1000x800 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:460
+    When I enter "cat" in the input                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And select "Black and White" for filter                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with No Collage Border, No Photo Border, 45 Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:290
+    When I enter "cat" in the input                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                           # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                          # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Collage with a Red Photo Border, No Collage Border, No Rotation, 800x600 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:375
+    When I enter "cat" in the input                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                         # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "0" for collage border width                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "white" for collage border color                                                                              # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "5" for photo border width                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "red" for photo border color                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "0" for minimum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "0" for maximum rotation                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And select "Black and White" for filter                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                             # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Empty Collage Topic                 # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:567
+    When I generate a collage for "" saying "A" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    Then I stay on the Main Page                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:176
+
+  Scenario: Empty Collage Shape                      # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:572
+    When I generate a collage for "sharks" saying "" # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:168
+    Then I stay on the Main Page                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:176
+
+  Scenario: Loading Animation          # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:577
+    When I enter "cat" in the input    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And click the build collage button # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:156
+    Then a loading animation appears   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:224
+
+  Scenario: Placeholder Text                                 # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:47
+    Then the input box has placeholder for Enter topic       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:56
+    Then the shape input box has placeholder for Enter shape # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:60
+
+  Scenario: Collage with Red Collage Border, No Photo Border, 45 Rotation, 1000x800 Dimensions, and Black and White Filter # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:498
+    When I enter "cat" in the input                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                                                                        # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And I click on the options button                                                                                      # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:8
+    And enter "5" for collage border width                                                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:64
+    And enter "red" for collage border color                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:68
+    And enter "0" for photo border width                                                                                   # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:72
+    And enter "white" for photo border color                                                                               # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:76
+    And enter "45" for minimum rotation                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:80
+    And enter "45" for maximum rotation                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:84
+    And enter "1000" for collage width                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:96
+    And enter "800" for collage height                                                                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:100
+    And select "Black and White" for filter                                                                                # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:104
+    And click on the set options button                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:140
+    And click on the build collage button                                                                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:88
+    And wait 30 seconds                                                                                                    # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:48
+    Then there is a collage with those features                                                                            # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:92
+
+  Scenario: Build Collage Button is Pressed without Collage Options Set # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/mainPage.feature:559
+    When I enter "cat" in the input                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:144
+    And enter "A" for collage shape                                     # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:148
+    And click the build collage button                                  # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:156
+    And wait 60 seconds                                                 # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:160
+    Then I am on the Collage Page                                       # sprint_3/code/cucumber-testing/features/step_definitions/mainPage_steps.rb:164
+
+38 scenarios (38 passed)
+502 steps (502 passed)
+18m22.148s
+
+Randomized with seed 12345
+student@CSC310VM:~/csci310_group2$ cucumber /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature --order=random:12345 --guess
+Feature: Login Page
+
+  Background:                    # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature:4
+    Given I am on the login page # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:1
+
+  Scenario: Username Box         # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature:7
+    Then there is a username box # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:5
+
+  Scenario: Login Failed                       # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature:26
+    When I enter "invalid" in the username box # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:17
+    And I enter "invalid" in the password box  # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:21
+    And click the login button                 # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:25
+    Then I am on the Login Page still          # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:33
+
+  Scenario: Login Button is Pressed               # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature:19
+    When I enter "username" in the username box   # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:17
+    And I enter "password" in the password box    # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:21
+    And click the login button                    # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:25
+    Then I am on the Main Page for the first time # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:29
+
+  Scenario: Password Box         # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature:11
+    Then there is a password box # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:9
+
+  Scenario: Login Button         # /home/student/csci310_group2/sprint_3/code/cucumber-testing/features/loginPage.feature:15
+    Then there is a login button # sprint_3/code/cucumber-testing/features/step_definitions/loginPage_steps.rb:13
+
+5 scenarios (5 passed)
+16 steps (16 passed)
+0m4.031s
+
+Randomized with seed 12345
+
