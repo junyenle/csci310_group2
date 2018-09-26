@@ -16,3 +16,7 @@ Pablo: Frontend
 Jun: Backend / Testing
 
 Pedro / Brian: Testing
+
+# Process:
+
+Scrum
