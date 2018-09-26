@@ -1,2 +1,8 @@
-# csci310_group2
-GitHub Repo for all CSCI310 Project 2 related files and documents.
+# Collage Builder Web App
+
+Web app that automatically generates collages based on user settings.
+
+Java backend.
+Uses Google Custom Search API.
+
+Forked from original group repository.
